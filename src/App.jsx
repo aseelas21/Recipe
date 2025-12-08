@@ -1,35 +1,73 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import HomePage from "./pages/HomePage";
+import FormPage from "./pages/FormPage";
+import ApiPage from "./pages/ApiPage";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [currentPage, setCurrentPage] = useState("home");
+
+  const [recipes, setRecipes] = useState([
+    {
+      id: 1,
+      name: "Pasta Alfredo",
+      description: "Creamy pasta with parmesan and garlic.",
+      time: 25,
+      difficulty: "Easy",
+      category: "Main Dish",
+      imageURL: null,
+      isVegetarian: false,
+    },
+    {
+      id: 2,
+      name: "Chicken Salad",
+      description: "Fresh salad with grilled chicken and veggies.",
+      time: 15,
+      difficulty: "Medium",
+      category: "Salad",
+      imageURL: null,
+      isVegetarian: true,
+    },
+  ]);
+
+  const addRecipe = (newRecipe) => {
+    setRecipes((prev) => [...prev, { id: prev.length + 1, ...newRecipe }]);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <div className="app">
+      <nav className="navbar">
+        <button
+          className={
+            "nav-button" + (currentPage === "home" ? " active" : "")
+          }
+          onClick={() => setCurrentPage("home")}
+        >
+          Home
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+        <button
+          className={
+            "nav-button" + (currentPage === "form" ? " active" : "")
+          }
+          onClick={() => setCurrentPage("form")}
+        >
+          Add Recipe
+        </button>
+        <button
+          className={
+            "nav-button" + (currentPage === "api" ? " active" : "")
+          }
+          onClick={() => setCurrentPage("api")}
+        >
+          API Recipes
+        </button>
+      </nav>
+
+      {currentPage === "home" && <HomePage recipes={recipes} />}
+      {currentPage === "form" && <FormPage addRecipe={addRecipe} />}
+      {currentPage === "api" && <ApiPage />}
+    </div>
+  );
 }
 
-export default App
+export default App;
+
