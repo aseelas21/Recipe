@@ -1,25 +1,38 @@
 import { useEffect, useState } from "react";
+import RecipeCard from "../components/RecipeCard";
 
 export default function ApiPage() {
-  const [recipes, setRecipes] = useState([]);
+  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
-  const API_KEY = "1d1f2e8661cf4723bcf702db9d63c910";
 
   useEffect(() => {
     async function fetchRecipes() {
       try {
+        setLoading(true);
+        setError("");
+
         const res = await fetch(
-          `https://api.spoonacular.com/recipes/random?number=15&apiKey=${API_KEY}`
+          "https://www.themealdb.com/api/json/v1/1/search.php?s="
         );
 
-        if (!res.ok) throw new Error("Failed to load recipes");
+        if (!res.ok) throw new Error("Failed to fetch recipes");
 
         const data = await res.json();
-        setRecipes(data.recipes);
-      } catch (err) {
-        setError("Error loading recipes.");
+        const meals = data.meals || [];
+
+        const mapped = meals.slice(0, 20).map((m) => ({
+          id: "api-" + m.idMeal,
+          title: m.strMeal,
+          image: m.strMealThumb,
+          description: "",
+          meta: `${m.strArea} • ${m.strCategory}`,
+          source: "api",
+        }));
+
+        setItems(mapped);
+      } catch (e) {
+        setError(e.message || "Error");
       } finally {
         setLoading(false);
       }
@@ -28,29 +41,36 @@ export default function ApiPage() {
     fetchRecipes();
   }, []);
 
-  if (loading) return <p>Loading recipes...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading) {
+    return (
+      <div className="page">
+        <h1>API Recipes</h1>
+        <p className="subtext">Loading...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="page">
+        <h1>API Recipes</h1>
+        <p className="error">{error}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="page">
       <h1>API Recipes</h1>
-      <p className="subtext">Fetched from a real online API.</p>
+      <p className="subtext">Add items to favorites using the global Context.</p>
 
       <div className="cards-grid">
-        {recipes.map((recipe) => (
-          <div className="api-card" key={recipe.id}>
-            <img src={recipe.image} alt={recipe.title} />
-            <h3 className="api-title">{recipe.title}</h3>
-            <p style={{ fontSize: "12px" }}>
-              Ready in: {recipe.readyInMinutes} mins
-            </p>
-            <p style={{ fontSize: "12px" }}>
-              Servings: {recipe.servings}
-            </p>
-          </div>
+        {items.map((r) => (
+          <RecipeCard key={r.id} recipe={r} />
         ))}
       </div>
     </div>
   );
 }
+
 

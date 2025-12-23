@@ -1,30 +1,30 @@
+import { useFavorites } from "../context/FavoritesContext";
+
 export default function RecipeCard({ recipe }) {
+  const { addFavorite, removeFavorite, isFavorite } = useFavorites();
+  const fav = isFavorite(recipe.id);
+
+  const handleFav = () => {
+    if (fav) removeFavorite(recipe.id);
+    else addFavorite(recipe);
+  };
+
   return (
-    <div className="recipe-card">
-      {recipe.imageURL && (
-        <img
-          src={recipe.imageURL}
-          alt={recipe.name}
-          className="recipe-image"
-        />
+    <div className="recipe-card" style={{ width: "100%", maxWidth: 420 }}>
+      {recipe.image && (
+        <img className="recipe-image" src={recipe.image} alt={recipe.title} />
       )}
 
-      <h3 className="recipe-title">{recipe.name}</h3>
+      <h3 className="recipe-title">{recipe.title}</h3>
 
-      <p className="recipe-meta">{recipe.description}</p>
+      {recipe.description && <p className="recipe-meta">{recipe.description}</p>}
+      {recipe.meta && <p className="recipe-meta">{recipe.meta}</p>}
 
-      <div className="recipe-meta">
-        Time: {recipe.time} minutes
-      </div>
-
-      <div className="badge-row">
-        <span className="badge">Difficulty: {recipe.difficulty}</span>
-        <span className="badge secondary">Category: {recipe.category}</span>
-        <span className="badge chip">
-          {recipe.isVegetarian ? "Vegetarian" : "Non-vegetarian"}
-        </span>
-      </div>
+      <button className="button-primary" type="button" onClick={handleFav}>
+        {fav ? "★ Remove from Favorites" : "☆ Add to Favorites"}
+      </button>
     </div>
   );
 }
+
 
