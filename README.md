@@ -1,40 +1,32 @@
- # RecipeVault – React Project
+# RecipeVault – React Homework #2 (Router & Context)
 
-This project was built using React + Vite as part of a university assignment.
-The website includes three main pages:
+This project upgrades Homework #1 by adding:
+- **Routing (React Router)**
+- **Global State (React Context)**
 
-1) Home Page
+## Routes
+- `/` → Home Page
+- `/form` → Form Page
+- `/api` → API Page
+- `*` → 404 Not Found Page
 
-Displays a list of recipes stored in the app.
-It uses useState, map(), and a separate RecipeCard component for clean layout.
+Navigation is done using **NavLink** and the URL changes when switching pages.
 
-2) Add Recipe (Form Page)
+## Context (FavoritesContext)
+I created **FavoritesContext** to store a global list of favorite recipes.
+The context includes:
+- `favorites` (array)
+- `addFavorite(item)`
+- `removeFavorite(id)`
+- `isFavorite(id)`
 
-A controlled form that allows the user to add a new recipe.
-It includes validation, several input fields, and image upload with preview.
-Once submitted, the new recipe appears immediately on the Home Page.
+### Where Context is used (at least 2 places)
+- **Navbar**: shows the number of favorites (⭐ count)
+- **RecipeCard**: button to Add/Remove favorites
+- **Home Page**: displays “My Favorites” section
+- **API Page**: favorites can be added from API results
 
-3) API Recipes Page
-
-Fetches real recipes from an online API using fetch().
-The page handles loading and error states and displays the results using map().
-
-How to Run
+## How to Run
+```bash
 npm install
 npm run dev
-
-Main Concepts Used
-
-useState + props
-
-Controlled inputs
-
-Validation
-
-Fetch API
-
-Conditional rendering (loading/error)
-
-map() for lists
-
-Basic CSS styling
