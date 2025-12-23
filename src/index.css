@@ -226,3 +226,17 @@ body {
   font-size: 15px;
   margin: 0 0 4px 0;
 }
+.brand {
+  font-weight: 800;
+  margin-right: 14px;
+  color: #4f46e5;
+}
+
+.fav-pill {
+  margin-left: 14px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #4338ca;
+  font-size: 13px;
+}
