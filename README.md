@@ -1,32 +1,46 @@
-# RecipeVault – React Homework #2 (Router & Context)
+RecipeVault – React Homework #3
 
-This project upgrades Homework #1 by adding:
-- **Routing (React Router)**
-- **Global State (React Context)**
+This project extends the previous assignment by adding React Router, Custom Hooks, and Redux Toolkit.
 
-## Routes
-- `/` → Home Page
-- `/form` → Form Page
-- `/api` → API Page
-- `*` → 404 Not Found Page
+Routing
 
-Navigation is done using **NavLink** and the URL changes when switching pages.
+/ → Home
 
-## Context (FavoritesContext)
-I created **FavoritesContext** to store a global list of favorite recipes.
-The context includes:
-- `favorites` (array)
-- `addFavorite(item)`
-- `removeFavorite(id)`
-- `isFavorite(id)`
+/form → Form
 
-### Where Context is used (at least 2 places)
-- **Navbar**: shows the number of favorites (⭐ count)
-- **RecipeCard**: button to Add/Remove favorites
-- **Home Page**: displays “My Favorites” section
-- **API Page**: favorites can be added from API results
+/api → API
 
-## How to Run
-```bash
+* → 404 Page
+
+Navigation is done using React Router.
+
+Custom Hooks
+
+useLocalStorage → stores the selected theme (Light/Dark).
+
+useFetch → fetches API data and handles loading and error states.
+
+Redux Toolkit
+
+Favorites are managed globally using Redux.
+
+Includes:
+
+favorites list
+
+addFavorite / removeFavorite / clearFavorites actions
+
+Used in:
+
+Navbar (favorites count)
+
+RecipeCard (add/remove favorites)
+
+Home Page (favorites display)
+
+Run Project
 npm install
 npm run dev
+
+
+Aseel Abu Saleh — React Homework #3

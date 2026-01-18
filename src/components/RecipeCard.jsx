@@ -1,12 +1,15 @@
-import { useFavorites } from "../context/FavoritesContext";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavorite, removeFavorite } from "../store/favoritesSlice";
 
 export default function RecipeCard({ recipe }) {
-  const { addFavorite, removeFavorite, isFavorite } = useFavorites();
-  const fav = isFavorite(recipe.id);
+  const dispatch = useDispatch();
+  const isFav = useSelector((state) =>
+    state.favorites.items.some((x) => x.id === recipe.id)
+  );
 
-  const handleFav = () => {
-    if (fav) removeFavorite(recipe.id);
-    else addFavorite(recipe);
+  const toggleFav = () => {
+    if (isFav) dispatch(removeFavorite(recipe.id));
+    else dispatch(addFavorite(recipe));
   };
 
   return (
@@ -16,12 +19,11 @@ export default function RecipeCard({ recipe }) {
       )}
 
       <h3 className="recipe-title">{recipe.title}</h3>
-
       {recipe.description && <p className="recipe-meta">{recipe.description}</p>}
       {recipe.meta && <p className="recipe-meta">{recipe.meta}</p>}
 
-      <button className="button-primary" type="button" onClick={handleFav}>
-        {fav ? "★ Remove from Favorites" : "☆ Add to Favorites"}
+      <button className="button-primary" type="button" onClick={toggleFav}>
+        {isFav ? "★ Remove Favorite" : "☆ Add Favorite"}
       </button>
     </div>
   );

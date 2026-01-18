@@ -240,3 +240,15 @@ body {
   color: #4338ca;
   font-size: 13px;
 }
+.theme-light { background: #ffffff; color: #222; }
+.theme-dark  { background: #0b1020; color: #f3f4f6; }
+
+.theme-dark .navbar { background: #0b1020ee; }
+.theme-dark .recipe-card,
+.theme-dark .api-card {
+  background: #111831;
+  color: #f3f4f6;
+}
+.theme-dark .recipe-meta { color: #cbd5e1; }
+.theme-dark .nav-button { background: #1b2447; color: #f3f4f6; }
+.theme-dark .nav-button.active { background: #4f46e5; color: white; }

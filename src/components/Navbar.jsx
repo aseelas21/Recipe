@@ -1,8 +1,8 @@
- import { NavLink } from "react-router-dom";
-import { useFavorites } from "../context/FavoritesContext";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-export default function Navbar() {
-  const { favorites } = useFavorites();
+export default function Navbar({ theme, setTheme }) {
+  const favoritesCount = useSelector((state) => state.favorites.items.length);
 
   const linkClass = ({ isActive }) =>
     "nav-button" + (isActive ? " active" : "");
@@ -11,19 +11,20 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="brand">RecipeVault</div>
 
-      <NavLink to="/" className={linkClass}>
-        Home
-      </NavLink>
+      <NavLink to="/" className={linkClass}>Home</NavLink>
+      <NavLink to="/form" className={linkClass}>Add Recipe</NavLink>
+      <NavLink to="/api" className={linkClass}>API Recipes</NavLink>
 
-      <NavLink to="/form" className={linkClass}>
-        Add Recipe
-      </NavLink>
+      <button
+        className="nav-button"
+        type="button"
+        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      >
+        {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+      </button>
 
-      <NavLink to="/api" className={linkClass}>
-        API Recipes
-      </NavLink>
-
-      <div className="fav-pill">⭐ {favorites.length}</div>
+      <div className="fav-pill">⭐ {favoritesCount}</div>
     </nav>
   );
 }
+

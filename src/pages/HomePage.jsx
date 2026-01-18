@@ -1,8 +1,23 @@
 import RecipeCard from "../components/RecipeCard";
-import { useFavorites } from "../context/FavoritesContext";
+import useFetch from "../hooks/useFetch";
+import { useSelector } from "react-redux";
 
 export default function HomePage() {
-  const { favorites } = useFavorites();
+  const favorites = useSelector((state) => state.favorites.items);
+
+
+  const { data, loading, error } = useFetch(
+    "https://www.themealdb.com/api/json/v1/1/search.php?s=chicken"
+  );
+
+  const previewMeals = (data?.meals || []).slice(0, 3).map((m) => ({
+    id: "preview-" + m.idMeal,
+    title: m.strMeal,
+    image: m.strMealThumb,
+    description: "",
+    meta: `${m.strArea} • ${m.strCategory}`,
+    source: "api-preview",
+  }));
 
   const homeRecipes = [
     {
@@ -26,7 +41,6 @@ export default function HomePage() {
   return (
     <div className="page">
       <h1>RecipeVault</h1>
-      <p className="subtext">Home recipes + your favorites.</p>
 
       <h2 style={{ marginTop: 20 }}>Home Recipes</h2>
       <div className="cards-grid">
@@ -37,7 +51,7 @@ export default function HomePage() {
 
       <h2 style={{ marginTop: 40 }}>⭐ My Favorites</h2>
       {favorites.length === 0 ? (
-        <p className="subtext">No favorites yet. Add some from Home or API.</p>
+        <p className="subtext">No favorites yet. Add from Home or API.</p>
       ) : (
         <div className="cards-grid">
           {favorites.map((f) => (
@@ -45,6 +59,18 @@ export default function HomePage() {
           ))}
         </div>
       )}
+
+      <h2 style={{ marginTop: 40 }}>API Preview</h2>
+      {loading && <p className="subtext">Loading preview...</p>}
+      {error && <p className="error">{error}</p>}
+      {!loading && !error && (
+        <div className="cards-grid">
+          {previewMeals.map((r) => (
+            <RecipeCard key={r.id} recipe={r} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
+
