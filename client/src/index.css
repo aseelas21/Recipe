@@ -1,0 +1,310 @@
+/* =============== GLOBAL RESET =============== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: #ffffff;
+  color: #222;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+
+/* =============== NAVBAR =============== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #ffffffee;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: 16px 40px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.nav-button {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: #f0f0f0;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.nav-button:hover {
+  background: #e0e0ff;
+}
+
+.nav-button.active {
+  background: #4f46e5;
+  color: white;
+}
+
+
+/* =============== PAGE LAYOUT =============== */
+.page {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 50px 60px;
+}
+
+.page h1 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.page p.subtext {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+
+/* =============== GRID FOR CARDS =============== */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 32px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+
+/* =============== RECIPE CARD =============== */
+.recipe-card {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  width: 350px;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.recipe-image {
+  width: 100%;
+  height: 200px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.recipe-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.recipe-meta {
+  font-size: 14px;
+  color: #555;
+}
+
+.badge-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #4338ca;
+}
+
+.badge.secondary {
+  background: #e5f6ff;
+  color: #0369a1;
+}
+
+.badge.chip {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+
+/* =============== FORM STYLING =============== */
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 450px;
+  margin-top: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: 14px;
+  color: #444;
+}
+
+.input,
+.textarea,
+.select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d4d4d8;
+  font-size: 14px;
+}
+
+.textarea {
+  resize: vertical;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.button-primary {
+  margin-top: 12px;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 18px;
+  background: #4f46e5;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.button-primary:hover {
+  background: #4338ca;
+}
+
+.error {
+  color: #dc2626;
+  font-size: 13px;
+}
+
+.success {
+  color: #16a34a;
+  font-size: 13px;
+}
+
+
+/* =============== API CARDS (API Recipes Page) =============== */
+.api-card {
+  background: white;
+  border-radius: 16px;
+  padding: 12px;
+  width: 260px;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.07);
+}
+
+.api-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+
+.api-title {
+  font-size: 15px;
+  margin: 0 0 4px 0;
+}
+.brand {
+  font-weight: 800;
+  margin-right: 14px;
+  color: #4f46e5;
+}
+
+.fav-pill {
+  margin-left: 14px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #4338ca;
+  font-size: 13px;
+}
+.theme-light { background: #ffffff; color: #222; }
+.theme-dark  { background: #0b1020; color: #f3f4f6; }
+
+.theme-dark .navbar { background: #0b1020ee; }
+.theme-dark .recipe-card,
+.theme-dark .api-card {
+  background: #111831;
+  color: #f3f4f6;
+}
+.theme-dark .recipe-meta { color: #cbd5e1; }
+.theme-dark .nav-button { background: #1b2447; color: #f3f4f6; }
+.theme-dark .nav-button.active { background: #4f46e5; color: white; }
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background: white;
+  width: 90%;
+  max-width: 700px;
+  max-height: 85vh;
+  border-radius: 20px;
+  overflow-y: auto;
+  position: relative;
+  animation: slideUp 0.3s ease-out;
+}
+
+.theme-dark .modal-content {
+  background: #111831;
+  color: #f3f4f6;
+}
+
+.modal-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.modal-body { padding: 30px; }
+
+.full-description {
+  line-height: 1.6;
+  white-space: pre-line; /* Keeps the line breaks from the API */
+  margin-top: 15px;
+}
+
+.close-button {
+  position: absolute;
+  top: 15px; right: 20px;
+  font-size: 30px;
+  background: none; border: none;
+  color: white; cursor: pointer;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
