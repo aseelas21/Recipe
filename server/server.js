@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const app = express();
 app.use(cors({
-  origin: 'https://recipe-web-hs3b.onrender.com' 
+  origin: 'https://recipe-xhw5.onrender.com' 
 }));
 app.use(express.json());
 
