@@ -20,7 +20,7 @@ export default function FormPage() {
 
   useEffect(() => {
     if (editId) {
-      fetch(`http://localhost:5000/api/recipes/${editId}`)
+      fetch(`https://recipe-xhw5.onrender.com/api/recipes/${editId}`)
         .then((res) => res.json())
         .then((data) => {
           setName(data.title);
@@ -61,7 +61,7 @@ export default function FormPage() {
       image: preview,
     };
 
-    const url = editId ? `http://localhost:5000/api/recipes/${editId}` : "http://localhost:5000/api/recipes";
+    const url = editId ? `https://recipe-xhw5.onrender.com/api/recipes/${editId}` : "https://recipe-xhw5.onrender.com/api/recipes";
     const method = editId ? "PUT" : "POST";
 
     try {

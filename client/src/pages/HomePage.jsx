@@ -6,7 +6,7 @@ export default function HomePage() {
   const favorites = useSelector((state) => state.favorites.items);
 
   const { data: dbRecipes, loading: dbLoading, error: dbError, refetch } = useFetch(
-    "http://localhost:5000/api/recipes"
+    "https://recipe-xhw5.onrender.com/api/recipes"
   );
 
   const { data: apiData, loading: apiLoading } = useFetch(
@@ -23,7 +23,7 @@ export default function HomePage() {
 
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this recipe?")) {
-      await fetch(`http://localhost:5000/api/recipes/${id}`, { method: 'DELETE' });
+      await fetch(`https://recipe-xhw5.onrender.com/api/recipes/${id}`, { method: 'DELETE' });
       refetch();
     }
   };
