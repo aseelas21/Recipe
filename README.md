@@ -2,6 +2,9 @@
 
 A professional React application featuring a custom MongoDB database, integration with **TheMealDB API**, and persistent user favorites using Redux and Local Storage.
 
+## 🔗 Live
+**View the live application here:** [https://recipe-web-hs3b.onrender.com](https://recipe-web-hs3b.onrender.com)
+
 ## 🚀 How to Run the Project
 To run this project locally, you will need to start both the frontend and the backend.
 
