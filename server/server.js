@@ -4,7 +4,9 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'https://recipe-web-hs3b.onrender.com' 
+}));
 app.use(express.json());
 
 // 1. Database Connection
@@ -71,4 +73,4 @@ app.put('/api/recipes/:id', async (req, res) => {
 });
 
 const PORT = 5000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Server running on PORT:${PORT}`));
