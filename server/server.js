@@ -34,8 +34,12 @@ const Recipe = mongoose.model('Recipe', recipeSchema);
 
 // READ: Get all recipes
 app.get('/api/recipes', async (req, res) => {
-  const recipes = await Recipe.find();
-  res.json(recipes);
+  try {
+    const recipes = await Recipe.find();
+    res.json(recipes);
+  } catch (err) {
+    res.status(500).json({ error: "Server Error: Could not fetch recipes" });
+  }
 });
 
 // CREATE: Add a new recipe
@@ -72,5 +76,5 @@ app.put('/api/recipes/:id', async (req, res) => {
   res.json(updated);
 });
 
-const PORT = 5000;
-app.listen(PORT, () => console.log(`Server running on PORT:${PORT}`));
+const PORT = process.env.PORT || 5000; 
+app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT}`));
